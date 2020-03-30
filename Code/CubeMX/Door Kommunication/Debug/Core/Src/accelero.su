@@ -1,0 +1,3 @@
+accelero.c:51:6:Accelero_demo	48	static
+accelero.c:150:13:Accelero_Convert	32	static
+accelero.c:184:13:Accelero_SetHint	4	static

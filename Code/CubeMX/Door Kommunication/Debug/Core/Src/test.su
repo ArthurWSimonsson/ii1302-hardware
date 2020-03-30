@@ -1,0 +1,4 @@
+test.c:22:6:Test_program	8	static
+test.c:31:6:test_display	4	static
+test.c:40:6:test_led	8	static
+test.c:61:6:test_LCD	120	static

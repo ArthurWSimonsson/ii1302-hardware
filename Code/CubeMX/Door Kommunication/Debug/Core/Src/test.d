@@ -37,7 +37,8 @@ Core/Src/test.o: ../Core/Src/test.c ../Core/Inc/test.h ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h \
  ../Core/Inc/stm32l476g_discovery_glass_lcd.h \
- ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/lcd.h ../Core/Inc/main.h
+ ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/lcd.h ../Core/Inc/main.h \
+ ../Core/Inc/i2c.h
 
 ../Core/Inc/test.h:
 
@@ -124,3 +125,5 @@ Core/Src/test.o: ../Core/Src/test.c ../Core/Inc/test.h ../Core/Inc/main.h \
 ../Core/Inc/lcd.h:
 
 ../Core/Inc/main.h:
+
+../Core/Inc/i2c.h:

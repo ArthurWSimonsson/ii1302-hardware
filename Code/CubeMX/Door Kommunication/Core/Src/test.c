@@ -13,6 +13,7 @@
 #include "string.h"
 #include <stdio.h>
 #include "lcd.h"
+#include "i2c.h"
 
 /** @brief Test_program, test functions to be used in the project
  * and some extra functions to better understand how different commands
@@ -28,8 +29,12 @@ void Test_program(void)
 /** @brief Test_display, print something on the display
 @author  Daniel Gripenstedt
 @return void */
+void disp_ON(){
+
+}
 void test_display()
 {
+
 
 }/*End of function test_display*/
 

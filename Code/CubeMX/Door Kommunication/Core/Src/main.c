@@ -108,9 +108,12 @@ int main(void)
   MX_SPI2_Init();
   MX_USART2_UART_Init();
   MX_USB_HOST_Init();
+  MX_UART5_Init();
+  MX_UART4_Init();
   /* USER CODE BEGIN 2 */
 #ifdef RUN_TEST_PROGRAM
-  Test_program();
+  //Test_program();
+  test_disp();
 #else
   projekt();
 #endif
@@ -176,9 +179,12 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USART2
+                              |RCC_PERIPHCLK_UART4|RCC_PERIPHCLK_UART5
                               |RCC_PERIPHCLK_SAI1|RCC_PERIPHCLK_I2C1
                               |RCC_PERIPHCLK_I2C2|RCC_PERIPHCLK_USB;
   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
+  PeriphClkInit.Uart4ClockSelection = RCC_UART4CLKSOURCE_PCLK1;
+  PeriphClkInit.Uart5ClockSelection = RCC_UART5CLKSOURCE_PCLK1;
   PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
   PeriphClkInit.I2c2ClockSelection = RCC_I2C2CLKSOURCE_PCLK1;
   PeriphClkInit.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLLSAI1;

@@ -1,0 +1,5 @@
+testDisplay.c:11:6:test_disp	8	static
+testDisplay.c:19:6:wifi	56	static
+testDisplay.c:27:6:I2C_Scan	112	static
+testDisplay.c:52:6:test_OLED	8	static
+testDisplay.c:59:6:test_inbyggd	120	static

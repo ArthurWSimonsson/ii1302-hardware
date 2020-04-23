@@ -1,0 +1,4 @@
+functions.c:6:6:inb_disp_init	8	static
+functions.c:10:6:inb_disp_write	16	static
+functions.c:15:6:inb_disp_clear	8	static
+functions.c:19:6:inb_disp_scroll	4	static

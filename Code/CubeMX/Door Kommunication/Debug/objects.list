@@ -1,4 +1,5 @@
 "Core/Src/display_test.o"
+"Core/Src/functions_menu.o"
 "Core/Src/gpio.o"
 "Core/Src/i2c.o"
 "Core/Src/lcd.o"

@@ -49,7 +49,7 @@ void connect_WIFI()
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_LIST_AP, (sizeof TX_LIST_AP) - 1, 20000);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_LIST_AP, 1000, 20000);*/
 
-	uint8_t TX_CONNECT_WIFI [] = {'A','T','+','C','W','J','A','P','=','"','R','i','s','i','n','g','_','S','u','n','"',',','"','D','D','1','3','3','7','G','G','"','\r','\n'};
+	uint8_t TX_CONNECT_WIFI [] = {"Username and Pasword"};
 	uint8_t RX_CONNECTWIFI [100];
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_CONNECT_WIFI, sizeof (TX_CONNECT_WIFI), 1000);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_CONNECTWIFI, 100, 20000);

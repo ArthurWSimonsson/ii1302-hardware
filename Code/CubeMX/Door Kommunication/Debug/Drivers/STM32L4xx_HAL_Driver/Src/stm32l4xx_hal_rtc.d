@@ -1,4 +1,5 @@
-Core/Src/functions_menu.o: ../Core/Src/functions_menu.c \
+Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.o: \
+ ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -29,17 +30,15 @@ Core/Src/functions_menu.o: ../Core/Src/functions_menu.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_qspi.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h ../Core/Inc/lcd.h \
- ../Core/Inc/main.h ../Core/Inc/stm32l476g_discovery_glass_lcd.h \
- ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/i2c.h \
- ../Core/Inc/ssd1306_tests.h ../Core/Inc/ssd1306.h \
- ../Core/Inc/ssd1306_fonts.h
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 
@@ -101,6 +100,10 @@ Core/Src/functions_menu.o: ../Core/Src/functions_menu.c \
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_qspi.h:
 
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h:
+
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h:
+
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai.h:
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h:
@@ -114,19 +117,3 @@ Core/Src/functions_menu.o: ../Core/Src/functions_menu.c \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h:
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h:
-
-../Core/Inc/lcd.h:
-
-../Core/Inc/main.h:
-
-../Core/Inc/stm32l476g_discovery_glass_lcd.h:
-
-../Core/Inc/stm32l476g_discovery.h:
-
-../Core/Inc/i2c.h:
-
-../Core/Inc/ssd1306_tests.h:
-
-../Core/Inc/ssd1306.h:
-
-../Core/Inc/ssd1306_fonts.h:

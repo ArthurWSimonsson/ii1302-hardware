@@ -1,6 +1,0 @@
-display_test.c:15:6:test_disp	8	static
-display_test.c:20:6:test_menu	8	static
-display_test.c:24:6:test_joystick	16	static
-display_test.c:41:6:test_OLED	8	static
-display_test.c:66:6:test_inbyggd	120	static
-display_test.c:79:6:I2C_Scan	112	static

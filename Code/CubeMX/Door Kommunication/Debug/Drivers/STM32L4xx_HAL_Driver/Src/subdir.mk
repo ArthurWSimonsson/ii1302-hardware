@@ -22,6 +22,8 @@ C_SRCS += \
 ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.c \
 ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c \
 ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c \
+../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.c \
+../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.c \
 ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c \
 ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.c \
 ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c \
@@ -51,6 +53,8 @@ OBJS += \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.o \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o \
+./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.o \
+./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.o \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.o \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.o \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.o \
@@ -80,6 +84,8 @@ C_DEPS += \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.d \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.d \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.d \
+./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.d \
+./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.d \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.d \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.d \
 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.d \
@@ -128,6 +134,10 @@ Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o: ../Drivers/STM32L4xx_HAL_D
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L476xx -DDEBUG -c -I../USB_HOST/App -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../USB_HOST/Target -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o: ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L476xx -DDEBUG -c -I../USB_HOST/App -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../USB_HOST/Target -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.o: ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.c
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L476xx -DDEBUG -c -I../USB_HOST/App -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../USB_HOST/Target -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.o: ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.c
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L476xx -DDEBUG -c -I../USB_HOST/App -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../USB_HOST/Target -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.o: ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L476xx -DDEBUG -c -I../USB_HOST/App -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../USB_HOST/Target -I../Middlewares/ST/STM32_USB_Host_Library/Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.o: ../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.c

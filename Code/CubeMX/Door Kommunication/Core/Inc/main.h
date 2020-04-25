@@ -78,10 +78,6 @@ void Error_Handler(void);
 #define MAG_DRDY_GPIO_Port GPIOC
 #define VLCD_Pin GPIO_PIN_3
 #define VLCD_GPIO_Port GPIOC
-#define JOY_RIGHT_Pin GPIO_PIN_2
-#define JOY_RIGHT_GPIO_Port GPIOA
-#define JOY_UP_Pin GPIO_PIN_3
-#define JOY_UP_GPIO_Port GPIOA
 #define MFX_WAKEUP_Pin GPIO_PIN_4
 #define MFX_WAKEUP_GPIO_Port GPIOA
 #define JOY_DOWN_Pin GPIO_PIN_5
@@ -184,10 +180,6 @@ void Error_Handler(void);
 #define MEMS_MISO_GPIO_Port GPIOD
 #define MEMS_MOSI_Pin GPIO_PIN_4
 #define MEMS_MOSI_GPIO_Port GPIOD
-#define USART_TX_Pin GPIO_PIN_5
-#define USART_TX_GPIO_Port GPIOD
-#define USART_RX_Pin GPIO_PIN_6
-#define USART_RX_GPIO_Port GPIOD
 #define GYRO_CS_Pin GPIO_PIN_7
 #define GYRO_CS_GPIO_Port GPIOD
 #define M3V3_REG_ON_Pin GPIO_PIN_3

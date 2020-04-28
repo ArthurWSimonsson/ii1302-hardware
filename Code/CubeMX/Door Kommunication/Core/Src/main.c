@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "i2c.h"
+#include "iwdg.h"
 #include "lcd.h"
 #include "quadspi.h"
 #include "rtc.h"
@@ -109,12 +110,13 @@ int main(void)
   MX_SPI2_Init();
   MX_USB_HOST_Init();
   MX_UART4_Init();
+  MX_IWDG_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 #ifdef RUN_TEST_PROGRAM
   Test_program();
 #else
-  projekt();
+  project();
 #endif
   /* USER CODE END 2 */
 

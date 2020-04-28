@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include "ssd1306_fonts.h"
 #include "ssd1306.h"
+#include "iwdg.h"
 static RTC_TimeTypeDef sTime;
 static RTC_DateTypeDef sDate;
 
@@ -19,6 +20,7 @@ void project()
 	BSP_LED_Init(LED4);
 	BSP_LED_Init(LED5);
 	ssd1306_Init();
+	HAL_IWDG_Init(&hiwdg);
 
 	connect_WIFI();	//connect esp to router via wifi
 
@@ -30,9 +32,9 @@ void project()
 	uint8_t second = sTime.Seconds;*/
 
 	uint8_t prev_second;
-
 	uint8_t second_count = 0;	//counter varible for how many seconds has pasted since the last message
 
+	__HAL_IWDG_START(&hiwdg);	//start the watchdog with about 14 seconds timer
 	while(1) //super loop
 	{
 		if (message_timer(sTime.Seconds, prev_second) == true)	//if a second has passed, increment second_count
@@ -42,18 +44,19 @@ void project()
 
 		if (second_count >= 5)	//if 5 or more seconds has passed, request a new message and display it on the OLED
 		{
-			esp_as_TCP();
-			second_count = 0;
-
 			if (esp_ok() == false)
 			{
 				esp_error_handler();	//handle esp error
 			}
+
+			esp_as_TCP();
+			second_count = 0;
 		}
 
 		prev_second = sTime.Seconds;
 		HAL_RTC_GetTime(&hrtc,&sTime,RTC_FORMAT_BIN);
 		HAL_RTC_GetDate(&hrtc,&sDate,RTC_FORMAT_BIN);
 
+		__HAL_IWDG_RELOAD_COUNTER(&hiwdg);	//reset watchdog timer
 	}
 }/*End of function project*/

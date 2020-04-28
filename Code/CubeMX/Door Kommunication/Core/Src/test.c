@@ -17,6 +17,7 @@
 #include "ssd1306_fonts.h"
 #include "ssd1306.h"
 #include <stdbool.h>
+#include "iwdg.h";
 static RTC_TimeTypeDef sTime;
 static RTC_DateTypeDef sDate;
 /** @brief Test_program, test functions to be used in the project
@@ -36,6 +37,9 @@ void Test_program(void)
 	test_esp_ok();
 	//test_oled();
 	//test_message_timer();
+	//test_watchdog();
+	//test_systemReset();
+	//test_esp_error_handler();
 }/*End of function Test_program*/
 
 /** @brief Test_display, print something on the display
@@ -171,7 +175,7 @@ void test_wifi()
 	uint8_t RX_buffer [40];
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_buffer, (sizeof(TX_buffer) - 1), 1000);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_buffer, 40, 1000);
-	//connect_WIFI();
+	connect_WIFI();
 	//uint8_t *esp_IP = get_IP();
 	//esp_as_server();
 	/*uint8_t TX_IP_OF [] = "AT+CIFSR\r\n";	//ip adress of esp
@@ -184,13 +188,6 @@ void test_wifi()
 		esp_as_TCP();
 		HAL_Delay(5000);
 	}*/
-	while(1)
-	{
-		uint8_t test_array [] = "\r\nRecv 6 bytes\r\n\r\nSEND OK\r\n\r\n+IPD,19:office hours closed04:30\0\0\0K\r\n\r\0\0\0\0\0\0\0\0\003\0\0ÿ\0\0\0\0À~\001 l\nd \0\0\0\0\0\0\0";	//test array
-		uint8_t *ptr;
-		ptr = test_array;
-		get_message(ptr, sizeof(test_array));
-	}
 }/*End of function test_wifi*/
 
 /** @brief test_tcp, set up a tcp connection
@@ -282,11 +279,11 @@ void test_print_oled_message()
 	HAL_Delay(1000);
 	while(1)
 	{
-		uint8_t message_array [] = "\r\nRecv 6 bytes\r\n\r\nSEND OK\r\n\r\n+IPD,19:JAS-GRIPEN is the strongest and coolest man on this planet\0\0\0K\r\n\r\0\0\0\0\0\0\0\0\003\0\0ÿ\0\0\0\0À~\001 l\nd \0\0\0\0\0\0\0";
+		uint8_t message_array [] = "\r\nRecv 6 bytes\r\n\r\nSEND OK\r\n\r\n+IPD,19:HELLO THERE MR MACE WINDOW DO YOU LIKE PALP\0\0\0K\r\n\r\0\0\0\0\0\0\0\0\003\0\0ÿ\0\0\0\0À~\001 l\nd \0\0\0\0\0\0\0";
 		ssd1306_Fill(Black);
 		ssd1306_UpdateScreen();
-		HAL_Delay(1000);
 		print_oled_message(&message_array, sizeof(message_array));
+		HAL_Delay(1000);
 	}
 }/*End of test_print_oled_message*/
 
@@ -297,7 +294,7 @@ void test_print_oled_message()
 void test_esp_ok()
 {
 	BSP_LCD_GLASS_Init();
-	HAL_Delay(10000);	//wait for ESP to start
+	HAL_Delay(1000);	//wait for ESP to start
 	ssd1306_Init();
 	ssd1306_Fill(Black);
 	while(1)
@@ -310,15 +307,15 @@ void test_esp_ok()
 			ssd1306_WriteString("OK", Font_16x26, White);
 			ssd1306_UpdateScreen();
 		}
+
+		HAL_Delay(20000);
+
 		if(esp_ok() == false)
 		{
-			ssd1306_Fill(Black);
-			ssd1306_UpdateScreen();
-			ssd1306_SetCursor(2, 26);
-			ssd1306_WriteString("ERROR", Font_16x26, White);
-			ssd1306_UpdateScreen();
+			esp_error_handler();
 		}
-		HAL_Delay(5000);
+
+		HAL_Delay(20000);
 	}
 }/*End of test_esp_ok*/
 
@@ -365,36 +362,71 @@ void test_oled()
 @author  Daniel Gripenstedt */
 void test_message_timer()
 {
-	ssd1306_Init();
-	ssd1306_Fill(Black);
+	BSP_LED_Init(LED4);
+	BSP_LED_Init(LED5);
+	uint8_t prev_second;
 	HAL_RTC_GetTime(&hrtc,&sTime,RTC_FORMAT_BIN);
 	HAL_RTC_GetDate(&hrtc,&sDate,RTC_FORMAT_BIN);
-	//uint8_t hour = sTime.Hours;
-	//uint8_t minute = sTime.Minutes;
-	uint8_t prev_second = sTime.Seconds;
-	uint8_t count = 0;
-	char cbuff [2];
 
 	while(1)
 	{
 		if (message_timer(sTime.Seconds, prev_second) == true)
 		{
-			ssd1306_Fill(Black);
-			ssd1306_UpdateScreen();
-			count++;
-			sprintf(cbuff, count);
-			ssd1306_SetCursor(2, 2);
-			ssd1306_WriteString(cbuff, Font_6x8, White);
-			ssd1306_UpdateScreen();
-			cbuff[0] = '/0';
-			cbuff[1] = '/0';
+			BSP_LED_Toggle(LED4);
+			BSP_LED_Toggle(LED5);
 		}
 
+		prev_second = sTime.Seconds;
 		HAL_RTC_GetTime(&hrtc,&sTime,RTC_FORMAT_BIN);
 		HAL_RTC_GetDate(&hrtc,&sDate,RTC_FORMAT_BIN);
 
-		prev_second = sTime.Seconds;
 	}
-
-
 }/*End of function test_message_timer*/
+
+/** @brief test_watchdog, test the watchdog by turning on and off
+ * LEDs
+ * otherwise print ERROR
+@author  Daniel Gripenstedt */
+void test_watchdog()
+{
+	BSP_LED_Init(LED4);
+	BSP_LED_Init(LED5);
+	BSP_LED_Toggle(LED4);
+	HAL_IWDG_Init(&hiwdg);
+	__HAL_IWDG_START(&hiwdg);
+
+	while(1)
+	{
+		HAL_Delay(10000);
+		__HAL_IWDG_RELOAD_COUNTER(&hiwdg);
+		BSP_LED_Toggle(LED5);
+	}
+}/*End of function test_watchdog*/
+
+/** @brief test_systemReset, test the function HAL_NVIC_SystemReset()
+@author  Daniel Gripenstedt */
+void test_systemReset()
+{
+	BSP_LED_Init(LED4);
+	BSP_LED_Init(LED5);
+	BSP_LED_Toggle(LED4);
+
+	HAL_Delay(2000);
+	BSP_LED_Toggle(LED5);
+	BSP_LED_Toggle(LED4);
+	HAL_Delay(2000);
+
+	HAL_NVIC_SystemReset();
+}/*End of function test_systemReset*/
+
+/** @brief test_esp_error_handler, test the esp error handler
+@author  Daniel Gripenstedt */
+void test_esp_error_handler()
+{
+	ssd1306_Init();
+	ssd1306_Fill(Black);
+
+	esp_error_handler();
+}/*End of function test_esp_error_handler*/
+
+

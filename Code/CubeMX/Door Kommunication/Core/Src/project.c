@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include "ssd1306_fonts.h"
 #include "ssd1306.h"
-#include "iwdg.h"
+//#include "iwdg.h"
 static RTC_TimeTypeDef sTime;
 static RTC_DateTypeDef sDate;
 
@@ -20,9 +20,15 @@ void project()
 	BSP_LED_Init(LED4);
 	BSP_LED_Init(LED5);
 	ssd1306_Init();
-	HAL_IWDG_Init(&hiwdg);
+	//HAL_IWDG_Init(&hiwdg);
+	uint8_t TX_IP_OF [] = "AT+CIFSR\r\n";	//ip adress of esp
+	//static uint8_t time [8];
 
-	connect_WIFI();	//connect esp to router via wifi
+	//get_time(&time);
+
+	HAL_Delay(5000);
+	//if (esp_find_ok(&TX_IP_OF, sizeof(TX_IP_OF)) == false)
+	//connect_WIFI();	//connect esp to router via wifi
 
 	/*set up the time*/
 	HAL_RTC_GetTime(&hrtc,&sTime,RTC_FORMAT_BIN);
@@ -32,9 +38,10 @@ void project()
 	uint8_t second = sTime.Seconds;*/
 
 	uint8_t prev_second;
-	uint8_t second_count = 0;	//counter varible for how many seconds has pasted since the last message
+	uint8_t second_count = 60;	//counter varible for how many seconds has pasted since the last message
+	const uint8_t TIME_INTERVAL = 60;
 
-	__HAL_IWDG_START(&hiwdg);	//start the watchdog with about 14 seconds timer
+	//__HAL_IWDG_START(&hiwdg);	//start the watchdog with about 14 seconds timer
 	while(1) //super loop
 	{
 		if (message_timer(sTime.Seconds, prev_second) == true)	//if a second has passed, increment second_count
@@ -42,21 +49,21 @@ void project()
 			second_count++;
 		}
 
-		if (second_count >= 5)	//if 5 or more seconds has passed, request a new message and display it on the OLED
+		if (second_count >= TIME_INTERVAL)	//if 5 or more seconds has passed, request a new message and display it on the OLED
 		{
 			if (esp_ok() == false)
 			{
 				esp_error_handler();	//handle esp error
 			}
 
-			esp_as_TCP();
 			second_count = 0;
+			esp_as_TCP();
 		}
 
 		prev_second = sTime.Seconds;
 		HAL_RTC_GetTime(&hrtc,&sTime,RTC_FORMAT_BIN);
 		HAL_RTC_GetDate(&hrtc,&sDate,RTC_FORMAT_BIN);
 
-		__HAL_IWDG_RELOAD_COUNTER(&hiwdg);	//reset watchdog timer
+		//__HAL_IWDG_RELOAD_COUNTER(&hiwdg);	//reset watchdog timer
 	}
 }/*End of function project*/

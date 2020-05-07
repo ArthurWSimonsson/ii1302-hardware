@@ -25,7 +25,6 @@ Core/Src/project.o: ../Core/Src/project.c ../Core/Inc/test.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
@@ -42,7 +41,7 @@ Core/Src/project.o: ../Core/Src/project.c ../Core/Inc/test.h \
  ../Core/Inc/stm32l476g_discovery_glass_lcd.h \
  ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/lcd.h ../Core/Inc/main.h \
  ../Core/Inc/usart.h ../Core/Inc/rtc.h ../Core/Inc/ssd1306_fonts.h \
- ../Core/Inc/ssd1306.h ../Core/Inc/ssd1306_fonts.h ../Core/Inc/iwdg.h
+ ../Core/Inc/ssd1306.h ../Core/Inc/ssd1306_fonts.h
 
 ../Core/Inc/test.h:
 
@@ -100,8 +99,6 @@ Core/Src/project.o: ../Core/Src/project.c ../Core/Inc/test.h \
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h:
 
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h:
-
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h:
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
@@ -145,5 +142,3 @@ Core/Src/project.o: ../Core/Src/project.c ../Core/Inc/test.h \
 ../Core/Inc/ssd1306.h:
 
 ../Core/Inc/ssd1306_fonts.h:
-
-../Core/Inc/iwdg.h:

@@ -25,7 +25,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
@@ -41,9 +40,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h \
  ../Core/Inc/stm32l476g_discovery_glass_lcd.h \
  ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/i2c.h ../Core/Inc/main.h \
- ../Core/Inc/iwdg.h ../Core/Inc/lcd.h ../Core/Inc/quadspi.h \
- ../Core/Inc/rtc.h ../Core/Inc/sai.h ../Core/Inc/spi.h \
- ../Core/Inc/usart.h ../USB_HOST/App/usb_host.h ../Core/Inc/gpio.h
+ ../Core/Inc/lcd.h ../Core/Inc/quadspi.h ../Core/Inc/rtc.h \
+ ../Core/Inc/sai.h ../Core/Inc/spi.h ../Core/Inc/usart.h \
+ ../USB_HOST/App/usb_host.h ../Core/Inc/gpio.h
 
 ../Core/Inc/main.h:
 
@@ -99,8 +98,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h:
 
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h:
-
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h:
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
@@ -134,8 +131,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/i2c.h:
 
 ../Core/Inc/main.h:
-
-../Core/Inc/iwdg.h:
 
 ../Core/Inc/lcd.h:
 

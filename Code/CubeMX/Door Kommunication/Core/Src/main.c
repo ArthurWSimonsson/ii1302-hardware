@@ -21,7 +21,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "i2c.h"
-#include "iwdg.h"
 #include "lcd.h"
 #include "quadspi.h"
 #include "rtc.h"
@@ -44,7 +43,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define RUN_TEST_PROGRAM
-//#undef RUN_TEST_PROGRAM
+#undef RUN_TEST_PROGRAM
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -110,7 +109,6 @@ int main(void)
   MX_SPI2_Init();
   MX_USB_HOST_Init();
   MX_UART4_Init();
-  MX_IWDG_Init();
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 #ifdef RUN_TEST_PROGRAM

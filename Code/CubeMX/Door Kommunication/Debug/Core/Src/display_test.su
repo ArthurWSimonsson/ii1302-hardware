@@ -1,0 +1,9 @@
+display_test.c:18:6:test_wifi_uart	40	static
+display_test.c:31:6:test_contrast	16	static
+display_test.c:46:6:test_QR	8	static
+display_test.c:54:6:test_menu	8	static
+display_test.c:63:6:test_joystick	16	static
+display_test.c:108:6:test_OLED	8	static
+display_test.c:133:6:test_inbyggd	120	static
+display_test.c:146:6:I2C_Scan	112	static
+display_test.c:170:6:test_disp	8	static

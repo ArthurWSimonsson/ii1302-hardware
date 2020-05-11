@@ -36,13 +36,16 @@ default.size.stdout \
 OBJDUMP_LIST += \
 Door\ Kommunication.list \
 
+OBJCOPY_BIN += \
+Door\ Kommunication.bin \
+
 
 # All Target
 all: Door\ Kommunication.elf secondary-outputs
 
 # Tool invocations
-Door\ Kommunication.elf: $(OBJS) $(USER_OBJS) C:\Users\BadazzDan\STM32CubeIDE\workspace_1.1.0\Door\ Kommunication\STM32L476VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "Door Kommunication.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\BadazzDan\STM32CubeIDE\workspace_1.1.0\Door Kommunication\STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Door Kommunication.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Door\ Kommunication.elf: $(OBJS) $(USER_OBJS) C:\Users\Sebbe\OneDrive\Dokument\STM32\workspace\ii1302-hardware\Code\CubeMX\Door\ Kommunication\STM32L476VGTX_FLASH.ld
+	arm-none-eabi-gcc -o "Door Kommunication.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Sebbe\OneDrive\Dokument\STM32\workspace\ii1302-hardware\Code\CubeMX\Door Kommunication\STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Door Kommunication.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -56,12 +59,17 @@ Door\ Kommunication.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+Door\ Kommunication.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "Door Kommunication.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:

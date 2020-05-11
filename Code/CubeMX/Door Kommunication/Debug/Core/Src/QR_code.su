@@ -1,0 +1,4 @@
+QR_code.c:4:6:draw_QR	56	static
+QR_code.c:20:6:draw_line_down	24	static
+QR_code.c:31:6:draw_line	24	static
+QR_code.c:42:6:draw_square	24	static

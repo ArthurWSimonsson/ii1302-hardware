@@ -112,7 +112,8 @@ int main(void)
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 #ifdef RUN_TEST_PROGRAM
-  Test_program();
+  //Test_program();
+  test_disp();
 #else
   projekt();
 #endif

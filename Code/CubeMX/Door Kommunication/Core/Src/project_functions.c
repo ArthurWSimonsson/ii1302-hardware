@@ -245,6 +245,7 @@ bool esp_ok ()
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_buffer, (sizeof (TX_buffer) - 1), 50);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_AT, 20, 50);
 
+
 	for (uint8_t i = 0; i < (sizeof(RX_AT) - 1); i++)
 	{
 		if ((RX_AT[i] == 'O') && (RX_AT[i + 1] == 'K'))

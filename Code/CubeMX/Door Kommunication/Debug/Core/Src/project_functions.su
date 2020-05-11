@@ -1,8 +1,8 @@
-project_functions.c:24:6:connect_WIFI	272	static
+project_functions.c:24:6:connect_WIFI	264	static
 project_functions.c:62:6:esp_as_server	600	static
 project_functions.c:104:6:esp_as_TCP	520	static
 project_functions.c:132:6:get_IP	24	static
 project_functions.c:145:6:print_oled_message	272	dynamic
-project_functions.c:238:6:esp_ok	80	static
-project_functions.c:273:6:massege_timer	16	static
-project_functions.c:292:6:esp_error_handler	8	static
+project_functions.c:238:6:esp_ok	48	static
+project_functions.c:274:6:massege_timer	16	static
+project_functions.c:293:6:esp_error_handler	8	static

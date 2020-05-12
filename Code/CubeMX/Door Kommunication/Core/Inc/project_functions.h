@@ -15,7 +15,7 @@
 //Project functions decelerations
 void connect_WIFI(void);
 void esp_as_server(void);
-void esp_as_TCP(void);
+uint8_t *esp_as_TCP();
 int get_IP(int);
 void print_oled_message(*uint8_t, uint8_t);
 bool esp_ok(void);
@@ -27,3 +27,4 @@ void Large_number (uint8_t Large_number);
 void get_time (void);
 void print_time(*uint8_t);
 void process_time (*uint8_t, *uint8_t, *uint8_t, *uint8_t);
+void init_stuff(void);

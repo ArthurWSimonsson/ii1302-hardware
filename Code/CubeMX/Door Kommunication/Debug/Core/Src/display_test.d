@@ -1,4 +1,4 @@
-Core/Src/test.o: ../Core/Src/test.c ../Core/Inc/test.h ../Core/Inc/main.h \
+Core/Src/display_test.o: ../Core/Src/display_test.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -37,16 +37,13 @@ Core/Src/test.o: ../Core/Src/test.c ../Core/Inc/test.h ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h \
- ../Core/Inc/stm32l476g_discovery_glass_lcd.h \
- ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/lcd.h ../Core/Inc/main.h \
- ../Core/Inc/usart.h ../Core/Inc/rtc.h ../Core/Inc/ssd1306_fonts.h \
- ../Core/Inc/ssd1306.h ../Core/Inc/ssd1306_fonts.h \
- ../Core/Inc/display_test.h ../Core/Inc/functions_menu.h
-
-../Core/Inc/test.h:
-
-../Core/Inc/main.h:
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h ../Core/Inc/lcd.h \
+ ../Core/Inc/main.h ../Core/Inc/stm32l476g_discovery_glass_lcd.h \
+ ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/i2c.h \
+ ../Core/Inc/ssd1306_tests.h ../Core/Inc/ssd1306.h \
+ ../Core/Inc/ssd1306_fonts.h ../Core/Inc/functions_menu.h \
+ ../Core/Inc/usart.h ../Core/Inc/stm32l476g_discovery.h \
+ ../Core/Inc/QR_code.h ../Core/Inc/ssd1306.h
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 
@@ -126,24 +123,28 @@ Core/Src/test.o: ../Core/Src/test.c ../Core/Inc/test.h ../Core/Inc/main.h \
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h:
 
-../Core/Inc/stm32l476g_discovery_glass_lcd.h:
-
-../Core/Inc/stm32l476g_discovery.h:
-
 ../Core/Inc/lcd.h:
 
 ../Core/Inc/main.h:
 
-../Core/Inc/usart.h:
+../Core/Inc/stm32l476g_discovery_glass_lcd.h:
 
-../Core/Inc/rtc.h:
+../Core/Inc/stm32l476g_discovery.h:
 
-../Core/Inc/ssd1306_fonts.h:
+../Core/Inc/i2c.h:
+
+../Core/Inc/ssd1306_tests.h:
 
 ../Core/Inc/ssd1306.h:
 
 ../Core/Inc/ssd1306_fonts.h:
 
-../Core/Inc/display_test.h:
-
 ../Core/Inc/functions_menu.h:
+
+../Core/Inc/usart.h:
+
+../Core/Inc/stm32l476g_discovery.h:
+
+../Core/Inc/QR_code.h:
+
+../Core/Inc/ssd1306.h:

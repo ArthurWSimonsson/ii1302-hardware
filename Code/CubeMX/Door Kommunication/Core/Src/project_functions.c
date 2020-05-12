@@ -48,7 +48,7 @@ void connect_WIFI()
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_LIST_AP, (sizeof TX_LIST_AP) - 1, 20000);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_LIST_AP, 1000, 20000);*/
 
-	uint8_t TX_CONNECT_WIFI [] = {'A','T','+','C','W','J','A','P','=','"','U','S','E','R','N','A','M','E','"',',','"','P','A','S','W','O','R','D','"','\r','\n'}; //Byt bara ut USERNAME och PASWORD
+	uint8_t TX_CONNECT_WIFI [] = {'A','T','+','C','W','J','A','P','=','"','U','N','"',',','"','P','W','"','\r','\n'};
 	uint8_t RX_CONNECTWIFI [100];
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_CONNECT_WIFI, sizeof (TX_CONNECT_WIFI), 1000);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_CONNECTWIFI, 100, 20000);
@@ -88,7 +88,7 @@ void esp_as_server()
  * connection to a server
 @author  Daniel Gripenstedt, Arthur Simonsson, Botan Cosar
 @return void */
-void esp_as_TCP()
+uint8_t *esp_as_TCP()
 {
 	uint8_t TX_DOMAIN_NAME [] = "AT+CIPSTART=\"TCP\",\"35.228.147.153\",8080\r\n";
 	uint8_t RX_DOMAIN_NAME [100];
@@ -110,7 +110,15 @@ void esp_as_TCP()
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_END_TCP, 60, 1000);
 	HAL_Delay(100);
 
+	static uint8_t old_M [100];
+	//static uint8_t *p_old_M;
+	for (uint8_t i = 0; i < 100; i++)
+	{
+		old_M[i] = RX_M[i];
+	}
 	print_oled_message(&RX_M, sizeof(RX_M));
+	//p_old_M = &old_M;
+	return &old_M;
 }/*End of function esp_as_TCP*/
 
 /** @brief get_IP, get the IP adress of the esp
@@ -520,3 +528,13 @@ void process_time(uint8_t *time, uint8_t *hour, uint8_t *minute, uint8_t *second
 		*second = (*(time + 6) * 10) + *(time + 7);
 	}
 }/*End of function process_time*/
+
+void init_stuff()
+{
+	BSP_LCD_GLASS_Init();
+		BSP_LED_Init(LED4);
+		BSP_LED_Init(LED5);
+		ssd1306_Init();
+		menu_state();
+		cursor_init();
+}

@@ -464,8 +464,7 @@ uint8_t BSP_JOY_Init(JOYMode_TypeDef Joy_Mode)
   GPIO_InitTypeDef GPIO_InitStruct;
 
   /* Initialized the Joystick. */
-  for (joykey = JOY_SEL; joykey < (JOY_SEL + JOYn) ; joykey++)
-  {
+  joykey = JOY_DOWN;
     /* Enable the JOY clock */
     JOYx_GPIO_CLK_ENABLE(joykey);
 
@@ -489,7 +488,7 @@ uint8_t BSP_JOY_Init(JOYMode_TypeDef Joy_Mode)
       HAL_NVIC_SetPriority((IRQn_Type)(JOY_IRQn[joykey]), 0x0F, 0x00);
       HAL_NVIC_EnableIRQ((IRQn_Type)(JOY_IRQn[joykey]));
     }
-  }
+
 
   return HAL_OK;
 }

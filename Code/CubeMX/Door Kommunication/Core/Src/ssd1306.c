@@ -87,7 +87,6 @@ void ssd1306_Init(void) {
     ssd1306_WriteCommand(0x81); //--set contrast control register - CHECK
     ssd1306_WriteCommand(0xFF);
 
-
 #ifdef SSD1306_MIRROR_HORIZ
     ssd1306_WriteCommand(0xA0); // Mirror horizontally
 #else

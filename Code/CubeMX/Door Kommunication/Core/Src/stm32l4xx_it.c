@@ -87,7 +87,7 @@ void HardFault_Handler(void)
   /* USER CODE BEGIN HardFault_IRQn 0 */
 	ssd1306_Fill(Black);
 	ssd1306_SetCursor(2, 26);
-	ssd1306_WriteString("HARDWARE ERROR", Font_11x18, White);
+	ssd1306_WriteString("HARDWARE ERROR", Font_6x8, White);
 	ssd1306_UpdateScreen();
 
 	HAL_Delay(1000);

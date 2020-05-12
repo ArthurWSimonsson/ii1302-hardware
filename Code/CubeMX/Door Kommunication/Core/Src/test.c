@@ -17,6 +17,8 @@
 #include "ssd1306_fonts.h"
 #include "ssd1306.h"
 #include <stdbool.h>
+#include "display_test.h"
+#include "functions_menu.h"
 //#include "iwdg.h";
 static RTC_TimeTypeDef sTime;
 static RTC_DateTypeDef sDate;
@@ -42,7 +44,9 @@ void Test_program(void)
 	//test_esp_error_handler();
 	//test_print_time();
 	//test_get_time();
-	test_process_time();
+	//test_process_time();
+	//test_menu();
+	test_button();
 }/*End of function Test_program*/
 
 /** @brief Test_display, print something on the display
@@ -451,3 +455,20 @@ test_process_time()
 
 	}
 }/*End of function test_process_time*/
+
+void test_button()
+{
+	BSP_LED_Init(LED4);
+		BSP_LED_Init(LED5);
+		BSP_LED_Toggle(LED4);
+		BSP_LED_Toggle(LED5);
+		while(1)
+		{
+	if (HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_3) == 1)
+	{
+		HAL_Delay(300);
+		BSP_LED_Toggle(LED4);
+		BSP_LED_Toggle(LED5);
+	}
+		}
+}

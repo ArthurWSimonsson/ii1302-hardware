@@ -98,6 +98,8 @@ uint8_t menu_QR(void) {
 	while (1) {
 		JOYState_TypeDef state = BSP_JOY_GetState();
 		if (state == JOY_DOWN) {
+			ssd1306_WriteCommand(0x81);
+			ssd1306_WriteCommand(0xFF);
 			return MAIN;
 		}
 

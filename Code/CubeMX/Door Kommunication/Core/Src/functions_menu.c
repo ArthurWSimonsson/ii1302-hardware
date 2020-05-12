@@ -54,7 +54,7 @@ uint8_t cursor(void) {
 				}
 			}
 		}
-		if (state == JOY_SEL) {
+		if (state == JOY_DOWN) {
 			return selection;
 		}
 
@@ -97,19 +97,13 @@ uint8_t menu_QR(void) {
 	uint8_t value = 0xFF;
 	while (1) {
 		JOYState_TypeDef state = BSP_JOY_GetState();
-		if (state == JOY_SEL) {
+		if (state == JOY_DOWN) {
 			return MAIN;
 		}
-		if (state == JOY_RIGHT) {
-			value = value + 16;
-			ssd1306_WriteCommand(0x81);
-			ssd1306_WriteCommand(value);
-		}
-		if (state == JOY_LEFT) {
-			value = value - 16;
-			ssd1306_WriteCommand(0x81);
-			ssd1306_WriteCommand(value);
-		}
+
+		value = value - 4;
+		ssd1306_WriteCommand(0x81);
+		ssd1306_WriteCommand(value);
 		HAL_Delay(100);
 	}
 }
@@ -120,24 +114,15 @@ uint8_t menu_main(void) {
 	ssd1306_WriteString("MESSAGE HERE", Font_M, White);
 	ssd1306_SetCursor(2, 54);
 	ssd1306_WriteString("QR", Font_M, White);
-	ssd1306_SetCursor(64, 54);
-	ssd1306_WriteString("LOG", Font_M, White);
 	ssd1306_UpdateScreen();
 	cursor_init();
 	uint8_t selection = 0;
 	while (1) {
 		JOYState_TypeDef state = BSP_JOY_GetState();
+
 		if (state == JOY_DOWN) {
-			selection = cursor();
-		}
-		if (state == JOY_UP) {
-			selection = cursor();
-		}
-		if (state == JOY_SEL) {
 			if (selection == 0)
 				return QR;
-			if (selection == 1)
-				return LOG;
 		}
 	}
 
@@ -154,7 +139,6 @@ void menu_state(void) {
 			break;
 		case QR:
 			state = menu_QR();
-
 			break;
 		case LOG:
 			state = menu_log();
@@ -162,7 +146,7 @@ void menu_state(void) {
 		default:
 			ssd1306_Fill(Black);
 			ssd1306_SetCursor(2, 0);
-			ssd1306_WriteString("MESSAGE HERE", Font_M, White);
+			ssd1306_WriteString("ERROR", Font_M, White);
 			ssd1306_UpdateScreen();
 			break;
 		}

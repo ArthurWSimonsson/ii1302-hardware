@@ -46,10 +46,18 @@ void test_contrast(void) {
 void test_QR(void) {
 
 //uint8_t lines[29][29] = line_QR;
-	draw_QR(line_QR);
+//draw_QR(line_QR);
 //uint8_t line[29] = { 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 };
 //draw_line(line);
 //draw_square(5,5);
+//
+	test_button();
+}
+void test_button() {
+	while (1) {
+		uint8_t status = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+
+	}
 }
 void test_menu(void) {
 	menu_state();
@@ -64,6 +72,7 @@ void test_joystick() {
 	BSP_JOY_Init(JOY_MODE_GPIO);
 	JOYState_TypeDef state = BSP_JOY_GetState();
 	while (1) {
+
 		JOYState_TypeDef state = BSP_JOY_GetState();
 		if (state == JOY_SEL) {
 			ssd1306_Fill(Black);
@@ -176,4 +185,5 @@ void test_disp(void) {
 //test_joystick();
 //test_QR();
 //test_contrast();
+	//test_button();
 }

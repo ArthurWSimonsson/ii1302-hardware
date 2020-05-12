@@ -2,5 +2,5 @@ functions_menu.c:19:6:cursor_init	8	static
 functions_menu.c:25:9:cursor	24	static
 functions_menu.c:63:9:menu_log	16	static
 functions_menu.c:88:9:menu_QR	16	static
-functions_menu.c:117:9:menu_main	16	static
-functions_menu.c:147:6:menu_state	16	static
+functions_menu.c:111:9:menu_main	16	static
+functions_menu.c:132:6:menu_state	16	static

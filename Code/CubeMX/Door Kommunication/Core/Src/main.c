@@ -29,6 +29,7 @@
 #include "usart.h"
 #include "usb_host.h"
 #include "gpio.h"
+#include "project.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -43,7 +44,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define RUN_TEST_PROGRAM
-//#undef RUN_TEST_PROGRAM
+#undef RUN_TEST_PROGRAM
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -116,7 +117,7 @@ int main(void)
   //Test_program();
   test_disp();
 #else
-  projekt();
+  project();
 #endif
   /* USER CODE END 2 */
 

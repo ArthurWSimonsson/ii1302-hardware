@@ -42,7 +42,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/i2c.h ../Core/Inc/main.h \
  ../Core/Inc/lcd.h ../Core/Inc/quadspi.h ../Core/Inc/rtc.h \
  ../Core/Inc/sai.h ../Core/Inc/spi.h ../Core/Inc/usart.h \
- ../USB_HOST/App/usb_host.h ../Core/Inc/gpio.h
+ ../USB_HOST/App/usb_host.h ../Core/Inc/gpio.h ../Core/Inc/project.h
 
 ../Core/Inc/main.h:
 
@@ -147,3 +147,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../USB_HOST/App/usb_host.h:
 
 ../Core/Inc/gpio.h:
+
+../Core/Inc/project.h:

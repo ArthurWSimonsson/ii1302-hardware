@@ -3,7 +3,7 @@
   * @brief          : Header for QR_code.c
   *
   ******************************************************************************
-  * @author	Daniel Gripenstedt
+  * @author	Sebastian Thunberg
   ******************************************************************************
   */
 #include <stdint.h>

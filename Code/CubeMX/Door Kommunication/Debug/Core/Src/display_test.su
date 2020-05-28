@@ -1,10 +1,9 @@
 display_test.c:18:6:test_wifi_uart	40	static
 display_test.c:31:6:test_contrast	16	static
 display_test.c:46:6:test_QR	8	static
-display_test.c:56:6:test_button	16	static
-display_test.c:62:6:test_menu	8	static
-display_test.c:71:6:test_joystick	16	static
-display_test.c:117:6:test_OLED	8	static
-display_test.c:142:6:test_inbyggd	120	static
-display_test.c:155:6:I2C_Scan	112	static
-display_test.c:179:6:test_disp	8	static
+display_test.c:63:6:test_menu	8	static
+display_test.c:73:6:test_joystick	16	static
+display_test.c:119:6:test_OLED	8	static
+display_test.c:144:6:test_inbyggd	120	static
+display_test.c:157:6:I2C_Scan	112	static
+display_test.c:181:6:test_disp	8	static

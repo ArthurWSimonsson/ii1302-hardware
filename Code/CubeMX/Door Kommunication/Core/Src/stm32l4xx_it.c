@@ -23,6 +23,8 @@
 #include "stm32l4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "ssd1306_fonts.h"
+#include "ssd1306.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -83,7 +85,13 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
+	ssd1306_Fill(Black);
+	ssd1306_SetCursor(2, 26);
+	ssd1306_WriteString("HARDWARE ERROR", Font_6x8, White);
+	ssd1306_UpdateScreen();
 
+	HAL_Delay(1000);
+	HAL_NVIC_SystemReset();
   /* USER CODE END HardFault_IRQn 0 */
   while (1)
   {

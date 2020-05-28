@@ -39,8 +39,12 @@ SourceFiles#11=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunicatio
 SourceFiles#12=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Src/stm32l4xx_it.c
 SourceFiles#13=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Src/stm32l4xx_hal_msp.c
 HeaderFiles#14=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Inc/main.h
-HeaderFiles=;
 SourceFiles#14=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Src/main.c
+HeaderFiles#15=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Inc/main.h
+SourceFiles#15=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Src/main.c
+HeaderFiles#16=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Inc/main.h
+SourceFiles#16=C:/Users/BadazzDan/STM32CubeIDE/workspace_1.1.0/Door Kommunication/Core/Src/main.c
+HeaderFiles=;
 SourceFiles=;
 
 [PreviousLibFiles]

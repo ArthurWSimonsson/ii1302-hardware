@@ -1,3 +1,11 @@
+/*******************************************************************************
+  * @file           : function_menu.c
+  * @brief          : Functions for the menu
+  *
+  ******************************************************************************
+  * @author	Sebastian Thunberg
+  ******************************************************************************
+  */
 #include "stm32l4xx_hal.h"
 #include "string.h"
 #include <stdio.h>
@@ -91,10 +99,11 @@ uint8_t menu_QR(void) {
 	ssd1306_SetCursor(2, 54);
 	ssd1306_WriteString("BACK", Font_M, White);
 	ssd1306_UpdateScreen();
-	cursor_init();
+	/*cursor_init();
 	BSP_JOY_Init(JOY_MODE_GPIO);
 	uint8_t selection = 0;
 	uint8_t value = 0xFF;
+
 	while (1) {
 		JOYState_TypeDef state = BSP_JOY_GetState();
 		if (state == JOY_DOWN) {
@@ -102,18 +111,21 @@ uint8_t menu_QR(void) {
 			ssd1306_WriteCommand(0xFF);
 			return MAIN;
 		}
+<<<<<<< HEAD
 
 		value = value - 4;
 		ssd1306_WriteCommand(0x81);
 		ssd1306_WriteCommand(value);
 		HAL_Delay(100);
 	}
+=======
+		HAL_Delay(100);*/
 }
 
 uint8_t menu_main(void) {
 	ssd1306_Fill(Black);
 	ssd1306_SetCursor(2, 0);
-	ssd1306_WriteString("MESSAGE HERE", Font_M, White);
+	//ssd1306_WriteString("ASHOKA TANO", Font_M, White);
 	ssd1306_SetCursor(2, 54);
 	ssd1306_WriteString("QR", Font_M, White);
 	ssd1306_UpdateScreen();
@@ -126,6 +138,7 @@ uint8_t menu_main(void) {
 			if (selection == 0)
 				return QR;
 		}
+		project();
 	}
 
 	HAL_Delay(100);

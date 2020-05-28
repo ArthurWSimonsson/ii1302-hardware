@@ -442,6 +442,7 @@ void BSP_LED_Toggle(Led_TypeDef Led) {
 }
 
 /**
+<<<<<<< HEAD
  * @brief  Configures all buttons of the joystick in GPIO or EXTI modes.
  * @param  Joy_Mode: Joystick mode.
  *    This parameter can be one of the following values:
@@ -480,6 +481,49 @@ uint8_t BSP_JOY_Init(JOYMode_TypeDef Joy_Mode) {
 	}
 
 	return HAL_OK;
+=======
+  * @brief  Configures all buttons of the joystick in GPIO or EXTI modes.
+  * @param  Joy_Mode: Joystick mode.
+  *    This parameter can be one of the following values:
+  *     @arg  JOY_MODE_GPIO: Joystick pins will be used as simple IOs
+  *     @arg  JOY_MODE_EXTI: Joystick pins will be connected to EXTI line
+  *                                 with interrupt generation capability
+  * @retval HAL_OK: if all initializations are OK. Other value if error.
+  */
+uint8_t BSP_JOY_Init(JOYMode_TypeDef Joy_Mode)
+{
+  JOYState_TypeDef joykey;
+  GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* Initialized the Joystick. */
+  joykey = JOY_DOWN;
+    /* Enable the JOY clock */
+    JOYx_GPIO_CLK_ENABLE(joykey);
+
+    GPIO_InitStruct.Pin = JOY_PIN[joykey];
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+
+    if (Joy_Mode == JOY_MODE_GPIO)
+    {
+      /* Configure Joy pin as input */
+      GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+      HAL_GPIO_Init(JOY_PORT[joykey], &GPIO_InitStruct);
+    }
+    else if (Joy_Mode == JOY_MODE_EXTI)
+    {
+      /* Configure Joy pin as input with External interrupt */
+      GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+      HAL_GPIO_Init(JOY_PORT[joykey], &GPIO_InitStruct);
+
+      /* Enable and set Joy EXTI Interrupt to the lowest priority */
+      HAL_NVIC_SetPriority((IRQn_Type)(JOY_IRQn[joykey]), 0x0F, 0x00);
+      HAL_NVIC_EnableIRQ((IRQn_Type)(JOY_IRQn[joykey]));
+    }
+
+
+  return HAL_OK;
+>>>>>>> fcf4c9eae7f16101eb0af7152999620db784274b
 }
 
 /**

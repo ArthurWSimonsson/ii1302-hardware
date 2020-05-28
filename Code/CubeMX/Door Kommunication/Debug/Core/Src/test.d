@@ -41,7 +41,8 @@ Core/Src/test.o: ../Core/Src/test.c ../Core/Inc/test.h ../Core/Inc/main.h \
  ../Core/Inc/stm32l476g_discovery_glass_lcd.h \
  ../Core/Inc/stm32l476g_discovery.h ../Core/Inc/lcd.h ../Core/Inc/main.h \
  ../Core/Inc/usart.h ../Core/Inc/rtc.h ../Core/Inc/ssd1306_fonts.h \
- ../Core/Inc/ssd1306.h ../Core/Inc/ssd1306_fonts.h
+ ../Core/Inc/ssd1306.h ../Core/Inc/ssd1306_fonts.h \
+ ../Core/Inc/display_test.h ../Core/Inc/functions_menu.h
 
 ../Core/Inc/test.h:
 
@@ -142,3 +143,7 @@ Core/Src/test.o: ../Core/Src/test.c ../Core/Inc/test.h ../Core/Inc/main.h \
 ../Core/Inc/ssd1306.h:
 
 ../Core/Inc/ssd1306_fonts.h:
+
+../Core/Inc/display_test.h:
+
+../Core/Inc/functions_menu.h:

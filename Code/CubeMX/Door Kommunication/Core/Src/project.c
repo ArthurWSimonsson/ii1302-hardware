@@ -8,7 +8,10 @@
 #include "ssd1306_fonts.h"
 #include "ssd1306.h"
 
-/** @brief project, the main program
+/** @brief project, the main program, get a message from
+* a TCP server every minute and print it on a display
+* a button will show a QR-code that leads to a website
+* where messages can be left
 @author  Daniel Gripenstedt*/
 void project()
 {

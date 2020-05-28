@@ -3,4 +3,4 @@ functions_menu.c:25:9:cursor	24	static
 functions_menu.c:63:9:menu_log	16	static
 functions_menu.c:88:9:menu_QR	8	static
 functions_menu.c:116:9:menu_main	16	static
-functions_menu.c:147:6:menu_state	16	static
+functions_menu.c:138:6:menu_state	16	static

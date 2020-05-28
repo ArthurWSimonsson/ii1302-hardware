@@ -1,4 +1,4 @@
-project_functions.c:23:6:connect_WIFI	272	static
+project_functions.c:23:6:connect_WIFI	256	static
 project_functions.c:61:6:esp_as_server	488	static
 project_functions.c:91:6:esp_as_TCP	416	static
 project_functions.c:119:6:get_IP	24	static

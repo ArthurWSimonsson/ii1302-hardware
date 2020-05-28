@@ -1,3 +1,12 @@
+/*******************************************************************************
+  * @file           : display_test.c
+  * @brief          : test functions for the display
+  *
+  ******************************************************************************
+  * @author	Sebastian Thunberg
+  ******************************************************************************
+  */
+
 #include "stm32l4xx_hal.h"
 #include "string.h"
 #include <stdio.h>
@@ -27,7 +36,6 @@ void test_wifi_uart(void) {
 	ssd1306_UpdateScreen();
 
 }
-
 void test_contrast(void) {
 	ssd1306_Fill(Black);
 	ssd1306_SetCursor(2, 0);
@@ -42,14 +50,15 @@ void test_contrast(void) {
 	}
 
 }
-
 void test_QR(void) {
 
 //uint8_t lines[29][29] = line_QR;
-	draw_QR(line_QR);
+//draw_QR(line_QR);
 //uint8_t line[29] = { 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 };
 //draw_line(line);
 //draw_square(5,5);
+//
+	test_button();
 }
 void test_menu(void) {
 	ssd1306_Init();
@@ -57,14 +66,13 @@ void test_menu(void) {
 	cursor_init();
 	while (1) {
 		cursor();
-
 	}
 }
-
 void test_joystick() {
 	BSP_JOY_Init(JOY_MODE_GPIO);
 	JOYState_TypeDef state = BSP_JOY_GetState();
 	while (1) {
+
 		JOYState_TypeDef state = BSP_JOY_GetState();
 		if (state == JOY_SEL) {
 			ssd1306_Fill(Black);
@@ -105,7 +113,6 @@ void test_joystick() {
 
 	}
 }
-
 void test_OLED() {
 	while (1) {
 		ssd1306_Fill(Black);
@@ -129,7 +136,6 @@ void test_OLED() {
 		ssd1306_UpdateScreen();
 		HAL_Delay(1000);
 	}
-
 }
 void test_inbyggd() {
 	char buffer[50];
@@ -169,12 +175,12 @@ void I2C_Scan() {
 	inb_disp_write("end");
 }
 void test_disp(void) {
-	ssd1306_Init();
-//
-	test_menu();
-//I2C_Scan();
-//test_wifi_uart();
-//test_joystick();
-//test_QR();
-//test_contrast();
+	ssd1306_Init();test_menu();
+	test_OLED();
+	//I2C_Scan();
+	//test_wifi_uart();
+	//test_joystick();
+	//test_QR();
+	//test_contrast();
+	//test_button();
 }

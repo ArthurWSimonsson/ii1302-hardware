@@ -48,7 +48,7 @@ void connect_WIFI()
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_LIST_AP, (sizeof TX_LIST_AP) - 1, 20000);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_LIST_AP, 1000, 20000);*/
 
-	uint8_t TX_CONNECT_WIFI [] = {'A','T','+','C','W','J','A','P','=','"','U','N','"',',','"','P','W','"','\r','\n'};
+	uint8_t TX_CONNECT_WIFI [] = {'A','T','+','C','W','J','A','P','=','"','U','S','E','R','N','A','M','E','"',',','"','P','A','S','S','W','O','R','D','"','\r','\n'};	//only change USERNAME and PASSWORD
 	uint8_t RX_CONNECTWIFI [100];
 	HAL_UART_Transmit(&huart4, (uint8_t*)TX_CONNECT_WIFI, sizeof (TX_CONNECT_WIFI), 1000);
 	HAL_UART_Receive(&huart4, (uint8_t*)RX_CONNECTWIFI, 100, 20000);
@@ -85,40 +85,32 @@ void esp_as_server()
 }/*End of function esp_as_server*/
 
 /** @brief esp_as_TCP, set up a tcp connection
- * connection to a server
+ * to a server
 @author  Daniel Gripenstedt, Arthur Simonsson, Botan Cosar
 @return void */
-uint8_t *esp_as_TCP()
+void esp_as_TCP()
 {
-	uint8_t TX_DOMAIN_NAME [] = "AT+CIPSTART=\"TCP\",\"35.228.147.153\",8080\r\n";
-	uint8_t RX_DOMAIN_NAME [100];
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_DOMAIN_NAME, sizeof (TX_DOMAIN_NAME), 100);	//set up TCP connection
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_DOMAIN_NAME, 100, 1000);
+		uint8_t TX_DOMAIN_NAME [] = "AT+CIPSTART=\"TCP\",\"35.228.147.153\",8080\r\n";
+		uint8_t RX_DOMAIN_NAME [100];
+		HAL_UART_Transmit(&huart4, (uint8_t*)TX_DOMAIN_NAME, sizeof (TX_DOMAIN_NAME), 100);	//set up TCP connection
+		HAL_UART_Receive(&huart4, (uint8_t*)RX_DOMAIN_NAME, 100, 1000);
 
-	uint8_t TX_SEND [] = "AT+CIPSEND=9\r\n";
-	uint8_t TX_M [] = "welcome\r\n";
-	uint8_t RX_SEND [50];
-	uint8_t RX_M [100];
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_SEND, (sizeof (TX_SEND) - 1), 100);	//prepare to send data over TCP
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_SEND, 50, 100);
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_M, (sizeof (TX_M) - 1), 100);	//Send data over TCP
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_M, 100, 1000);
+		uint8_t TX_SEND [] = "AT+CIPSEND=9\r\n";
+		uint8_t TX_M [] = "welcome\r\n";
+		uint8_t RX_SEND [50];
+		uint8_t RX_M [100];
+		HAL_UART_Transmit(&huart4, (uint8_t*)TX_SEND, (sizeof (TX_SEND) - 1), 100);	//prepare to send data over TCP
+		HAL_UART_Receive(&huart4, (uint8_t*)RX_SEND, 50, 100);
+		HAL_UART_Transmit(&huart4, (uint8_t*)TX_M, (sizeof (TX_M) - 1), 100);	//Send data over TCP
+		HAL_UART_Receive(&huart4, (uint8_t*)RX_M, 100, 1000);
 
-	uint8_t TX_END_TCP [] = "AT+CIPCLOSE\r\n";
-	uint8_t RX_END_TCP [60];
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_END_TCP, (sizeof (TX_END_TCP) - 1), 500);	//Close TCP connection
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_END_TCP, 60, 1000);
-	HAL_Delay(100);
+		uint8_t TX_END_TCP [] = "AT+CIPCLOSE\r\n";
+		uint8_t RX_END_TCP [60];
+		HAL_UART_Transmit(&huart4, (uint8_t*)TX_END_TCP, (sizeof (TX_END_TCP) - 1), 500);	//Close TCP connection
+		HAL_UART_Receive(&huart4, (uint8_t*)RX_END_TCP, 60, 1000);
+		HAL_Delay(100);
 
-	static uint8_t old_M [100];
-	//static uint8_t *p_old_M;
-	for (uint8_t i = 0; i < 100; i++)
-	{
-		old_M[i] = RX_M[i];
-	}
 	print_oled_message(&RX_M, sizeof(RX_M));
-	//p_old_M = &old_M;
-	return &old_M;
 }/*End of function esp_as_TCP*/
 
 /** @brief get_IP, get the IP adress of the esp
@@ -133,14 +125,17 @@ int *get_IP ()
 	return RX_IP_OF;
 }/*End of function get_IP*/
 
-/** @brief get_message, get the message from the array
- * returned by the server
+/** @brief print_oled_message, print the message on
+ * the oled display. Max 3 rows and no words will be cut
+ * (that is, if a word goes outside of the display, that word
+ * will be written on the next row)
  * @param uint8_t *arr, uint8_t size
-@author  Daniel Gripenstedt
-@return uint8_t RX_IP_OF */
+@author  Daniel Gripenstedt */
 void print_oled_message (uint8_t *arr, uint8_t size)
 {
 	ssd1306_Fill(Black); //reset screen
+	ssd1306_SetCursor(2, 54);
+	ssd1306_WriteString("-> Leave a message" , Font_7x10, White);
 	uint8_t count = -1;	//how many characters of the message
 	uint8_t extra_char = 0;
 		uint8_t i;
@@ -302,7 +297,7 @@ void print_oled_message (uint8_t *arr, uint8_t size)
 				pos3 = pos2;
 			}
 
-			if ((m_row2[20] != ' ') && (message[42 - extra_char] != ' '))
+			if ((m_row2[20] != ' ') && (m_row2[21] != ' '))
 			{
 				k = space2;
 				for(uint8_t i = space; i <= 20; i++)
@@ -325,6 +320,7 @@ void print_oled_message (uint8_t *arr, uint8_t size)
 				ssd1306_WriteString(c_row2,Font_6x8, White);
 
 			char c_row3 [20];
+			pos3--;
 			for (k = 0; k <= 20; k++)
 				m_row3[k] = message[pos3++];
 			sprintf(c_row3, m_row3);
@@ -339,7 +335,7 @@ void print_oled_message (uint8_t *arr, uint8_t size)
 
 }/*End of function print_oled_message*/
 
-/** @brief esp_ok, test so the esp is working
+/** @brief esp_ok, check if the esp is working
 @author  Daniel Gripenstedt
 @return uint8_t bool*/
 bool esp_ok ()
@@ -364,7 +360,7 @@ bool esp_ok ()
 		return false;
 }/*End of function esp_ok*/
 
-/** @brief esp_ok, check for ok status
+/** @brief esp_find_ok, check for ok status from the ESP
  * @param uint8_t *TX_buffer, uint8_t size
 @author  Daniel Gripenstedt
 @return uint8_t bool*/
@@ -419,122 +415,15 @@ void esp_error_handler()
 	HAL_NVIC_SystemReset();
 }/*End of function esp_error_handler*/
 
-/** @brief Large_number, if the number has 2 digits
- * then split it into to numbers, digit 1 and digit 2.
- * @param Large_number
+/** @brief init_stuff, initiate peripherals
 @author  Daniel Gripenstedt
 @return void */
-void Large_number (uint8_t Large_number)
-{
-	double temp_num = Large_number / 10;	//first number
-
-	uint8_t first_num = floor(temp_num);	//make temp_num into an uint8_t
-
-	temp_num = Large_number;
-	int modulo_num = Large_number % 10;	//modulos can not be made on uint8_t
-	uint8_t second_num = modulo_num;
-}/*End of function Large_number*/
-
-/** @brief get_time, get the time from the server
- * then set the time for the MCU
-@author  Daniel Gripenstedt
-@return uint8_t  */
-void get_time(uint8_t *time)
-{
-	uint8_t TX_DOMAIN_NAME [] = "AT+CIPSTART=\"TCP\",\"35.228.147.153\",8080\r\n";
-	uint8_t RX_DOMAIN_NAME [100];
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_DOMAIN_NAME, sizeof (TX_DOMAIN_NAME), 100);	//set up TCP connection
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_DOMAIN_NAME, 100, 100);
-
-	uint8_t TX_SEND [] = "AT+CIPSEND=6\r\n";
-	uint8_t TX_M [] = "time\r\n";
-	uint8_t RX_SEND [50];
-	uint8_t RX_M [200];
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_SEND, (sizeof (TX_SEND) - 1), 50);	//prepare to send data over TCP
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_SEND, 50, 100);
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_M, (sizeof (TX_M) - 1), 100);	//Send data over TCP
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_M, 200, 500);
-
-	uint8_t TX_END_TCP [] = "AT+CIPCLOSE\r\n";
-	uint8_t RX_END_TCP [60];
-	HAL_UART_Transmit(&huart4, (uint8_t*)TX_END_TCP, (sizeof (TX_END_TCP) - 1), 100);	//Close TCP connection
-	HAL_UART_Receive(&huart4, (uint8_t*)RX_END_TCP, 60, 100);
-	HAL_Delay(100);
-
-
-			uint8_t i;
-			for (i = 30; i < 200; i++)	//find number of characters
-			{
-				if (RX_M[i] == ':') {break;}
-			}
-
-			for (uint8_t k = 0; k < 8; k++)
-			{
-				*(time + k) = (RX_M[k + 48]);
-				i++;
-			}
-	/*char c [5];
-
-	sprintf(c, message);
-	ssd1306_SetCursor(2, 34);
-	ssd1306_WriteString(c,Font_6x8, White);
-	ssd1306_UpdateScreen();*/
-}
-
-/** @brief print_time, print the current time
-@author  Daniel Gripenstedt
-@return uint8_t  */
-void print_time(uint8_t *time)
-{
-	*(time + 5) = ' ';
-	*(time + 6) = ' ';
-	*(time + 7) = ' ';
-	char c_time [5];
-	sprintf(c_time, time);
-	ssd1306_SetCursor(2, 34);
-	ssd1306_WriteString(c_time,Font_6x8, White);
-	ssd1306_UpdateScreen();
-}/*End of function print_time*/
-
-/** @brief print_time, print the current time
-@author  Daniel Gripenstedt
-@return uint8_t  */
-void process_time(uint8_t *time, uint8_t *hour, uint8_t *minute, uint8_t *second)
-{
-	if (*time == '0')
-	{
-		*hour = *(time + 1);
-	}
-	else
-	{
-		*hour = ((*time) * 10) + *(time + 1);
-	}
-
-	if (*(time + 3) == '0')
-	{
-		*minute = *(time + 4);
-	}
-	else
-	{
-		*minute = (*(time + 3) * 10) + *(time + 4);
-	}
-
-	if (*(time + 5) == '0')
-	{
-		*second = *(time + 7);
-	}
-	else
-	{
-		*second = (*(time + 6) * 10) + *(time + 7);
-	}
-}/*End of function process_time*/
-
 void init_stuff()
 {
 	BSP_LCD_GLASS_Init();
-		BSP_LED_Init(LED4);
-		BSP_LED_Init(LED5);
-		ssd1306_Init();
-		menu_state();
-		cursor_init();
-}
+	BSP_LED_Init(LED4);
+	BSP_LED_Init(LED5);
+	ssd1306_Init();
+	menu_state();
+	cursor_init();
+}/*End of function init_stuff*/

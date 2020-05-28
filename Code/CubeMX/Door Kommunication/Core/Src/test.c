@@ -19,7 +19,6 @@
 #include <stdbool.h>
 #include "display_test.h"
 #include "functions_menu.h"
-//#include "iwdg.h";
 static RTC_TimeTypeDef sTime;
 static RTC_DateTypeDef sDate;
 /** @brief Test_program, test functions to be used in the project
@@ -39,23 +38,11 @@ void Test_program(void)
 	//test_esp_ok();
 	//test_oled();
 	//test_message_timer();
-	//test_watchdog();
 	//test_systemReset();
 	//test_esp_error_handler();
-	//test_print_time();
-	//test_get_time();
-	//test_process_time();
 	//test_menu();
 	test_button();
 }/*End of function Test_program*/
-
-/** @brief Test_display, print something on the display
-@author  Daniel Gripenstedt
-@return void */
-void test_display()
-{
-
-}/*End of function test_display*/
 
 
 /** @brief test_led, turn on LED4 and LED5
@@ -126,7 +113,7 @@ void test_LCD()
 }/*End of function test_LCD*/
 
 /** @brief test_UART, send an AT command to the WIFI module
- * over UART4
+ * over UART4 and print response on the LCD display
 @author  Daniel Gripenstedt
 @return void */
 void test_UART()
@@ -147,7 +134,6 @@ void test_UART()
 		BSP_LCD_GLASS_ScrollSentence(RX_buffer2, 1, SCROLL_SPEED_MEDIUM);
 		HAL_Delay(1000);
 	}
-
 }/*End of function test_UART*/
 
 /** @brief test_usart_error_handler, error handler for the test of USART
@@ -222,6 +208,8 @@ void test_clock()
 }/*End of function test_clock*/
 
 /** @brief test_print_oled_message, test print_oled_message
+ * by sending an array with content similar to what is expected to
+ * be received from the TCP server
 @author  Daniel Gripenstedt
 @return void */
 void test_print_oled_message()
@@ -323,26 +311,6 @@ void test_message_timer()
 	}
 }/*End of function test_message_timer*/
 
-/** @brief test_watchdog, test the watchdog by turning on and off
- * LEDs
- * otherwise print ERROR
-@author  Daniel Gripenstedt */
-void test_watchdog()
-{
-	BSP_LED_Init(LED4);
-	BSP_LED_Init(LED5);
-	BSP_LED_Toggle(LED4);
-	/*HAL_IWDG_Init(&hiwdg);
-	__HAL_IWDG_START(&hiwdg);
-
-	while(1)
-	{
-		HAL_Delay(10000);
-		__HAL_IWDG_RELOAD_COUNTER(&hiwdg);
-		BSP_LED_Toggle(LED5);
-	}*/
-}/*End of function test_watchdog*/
-
 /** @brief test_systemReset, test the function HAL_NVIC_SystemReset()
 @author  Daniel Gripenstedt */
 void test_systemReset()
@@ -369,93 +337,9 @@ void test_esp_error_handler()
 	esp_error_handler();
 }/*End of function test_esp_error_handler*/
 
-/** @brief test_print_time,
+/** @brief test_button, test the added pushbutton by
+ * toggeling  two LED:s
 @author  Daniel Gripenstedt */
-test_print_time()
-{
-	ssd1306_Init();
-	ssd1306_Fill(Black);
-	uint8_t curr_time [] ="11:59";
-	while(1)
-	{
-		print_time(&curr_time);
-		HAL_Delay(1000);
-	}
-}/*End of function test_print_time*/
-
-/** @brief test_pget_time
-@author  Daniel Gripenstedt */
-test_get_time()
-{
-	ssd1306_Init();
-	ssd1306_Fill(Black);
-	static uint8_t curr_time [5];
-	while(1)
-	{
-		get_time(&curr_time);
-		print_time(&curr_time);
-		HAL_Delay(60000);
-	}
-}/*End of function test_print_time*/
-
-/** @brief test_process_time
-@author  Daniel Gripenstedt */
-test_process_time()
-{
-	ssd1306_Init();
-	ssd1306_Fill(Black);
-	static uint8_t curr_time [8] = "11:22:33";
-	uint8_t hour = 0;
-	static uint8_t minute;
-	static uint8_t second;
-	uint8_t first_num;
-	uint8_t second_num;
-	//get_time(&curr_time);
-	//process_time(&curr_time, &hour, &minute, &second);
-	if (curr_time[0] == '0')
-		{
-			hour = curr_time[1];
-		}
-		else
-		{
-			first_num = curr_time[0];
-			second_num = curr_time[1];
-			hour = ((first_num) + second_num);
-		}
-
-		if (curr_time [3]== '0')
-		{
-			minute = curr_time[4];
-		}
-		else
-		{
-			minute = (curr_time[3] * 10) + curr_time[4];
-		}
-
-		if (curr_time[6] == '0')
-		{
-			second = curr_time[7];
-		}
-		else
-		{
-			second = (curr_time[6] * 10) + curr_time[7];
-		}
-
-	sTime.Hours = hour;
-	sTime.Minutes = minute;
-	sTime.Seconds = second;
-	HAL_RTC_SetTime(&hrtc,&sTime,RTC_FORMAT_BIN);
-	HAL_RTC_SetDate(&hrtc,&sDate,RTC_FORMAT_BIN);
-
-	while(1)
-	{
-		HAL_Delay(1000);
-		HAL_RTC_GetTime(&hrtc,&sTime,RTC_FORMAT_BIN);
-		HAL_RTC_GetDate(&hrtc,&sDate,RTC_FORMAT_BIN);
-
-	}
-}/*End of function test_process_time*/
-
 void test_button()
 {
 	BSP_LED_Init(LED4);
@@ -464,11 +348,11 @@ void test_button()
 		BSP_LED_Toggle(LED5);
 		while(1)
 		{
-	if (HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_3) == 1)
-	{
-		HAL_Delay(300);
-		BSP_LED_Toggle(LED4);
-		BSP_LED_Toggle(LED5);
-	}
+			if (HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_3) == 1)
+			{
+				HAL_Delay(300);
+				BSP_LED_Toggle(LED4);
+				BSP_LED_Toggle(LED5);
+			}
 		}
-}
+}/*End of function test_button*/

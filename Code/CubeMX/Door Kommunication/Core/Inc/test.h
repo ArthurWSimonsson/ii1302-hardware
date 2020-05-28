@@ -28,8 +28,5 @@ void test_message_timer(void);
 void test_watchdog(void);
 void test_systemReset(void);
 void test_eso_error_handler(void);
-void test_print_time(void);
-void test_get_time(void);
-void test_process_time(void);
 void test_button(void);
 
